@@ -201,7 +201,8 @@ export const asyncRoutes = [
   // chartsRouter,
   // nestedRouter,
   // tableRouter,
-    adminRouter,
+  //三个。。。含义：将adminRouter数组中的内容取出
+    ...adminRouter,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

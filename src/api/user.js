@@ -2,7 +2,6 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    baseURL: 'http://localhost:7080',
     url: '/auth/login', // '/vue-element-admin/user/login',
     method: 'post',
     data: data
@@ -11,8 +10,7 @@ export function login(data) {
 
 export function getInfo(token) {
   return request({
-    baseURL: 'http://localhost:7080',
-    url: '/auth/info', // '/vue-element-admin/user/info',
+    url: 'api/auth/info', // '/vue-element-admin/user/info',
     method: 'get',
     params: { token }
   })
@@ -20,7 +18,7 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    baseURL: 'http://localhost:7080',
+    baseURL: 'http://localhost:5297',
     url: '/auth/logout', //'/vue-element-admin/user/logout',
     method: 'post'
   })
@@ -40,5 +38,14 @@ export function assignUserRoles(data) {
     url: `/user/update/roles`,
     method: 'put',
     data
+  })
+}
+
+export function importUser(data){
+  return request({
+    baseURL: 'http://localhost:5297',
+    url: '/user/import', // '/vue-element-admin/user/info',
+    method: 'post',
+    params: data
   })
 }

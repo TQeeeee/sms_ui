@@ -6,15 +6,16 @@
         <h3 class="title">请登录</h3>
       </div>
 
-      <el-form-item prop="username">
+<!--      删除了-->
+      <el-form-item prop="userid">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
+          ref="userId"
+          v-model="loginForm.userid"
+          placeholder="用户账号"
+          name="userid"
           type="text"
           tabindex="1"
           autocomplete="on"
@@ -31,7 +32,7 @@
             ref="password"
             v-model="loginForm.password"
             :type="passwordType"
-            placeholder="Password"
+            placeholder="密码"
             name="password"
             tabindex="2"
             autocomplete="on"
@@ -46,21 +47,6 @@
       </el-tooltip>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div style="position:relative">
-        <div class="tips">
-          <span>Username : admin</span>
-          <span>Password : any</span>
-        </div>
-        <div class="tips">
-          <span style="margin-right:18px;">Username : editor</span>
-          <span>Password : any</span>
-        </div>
-
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-          Or connect with
-        </el-button>
-      </div>
     </el-form>
 
     <el-dialog title="Or connect with" :visible.sync="showDialog">
@@ -97,11 +83,11 @@ export default {
     }
     return {
       loginForm: {
-        username: 'demo1',
+        userid: '800tq',
         password: '123456'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        userid: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
@@ -129,7 +115,7 @@ export default {
     window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === '') {
+    if (this.loginForm.userid === '') {
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
@@ -163,10 +149,7 @@ export default {
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => { // 登录成功
               // 路由到首页，指定query参数
-              console.log(this.redirect)
-              debugger
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-              debugger
               this.loading = false
             })
             .catch(() => { // 异常

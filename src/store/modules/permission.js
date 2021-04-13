@@ -70,9 +70,12 @@ const actions = {
 
     let accessedRoutes
     // 判断当前的角色列表中，是否有包含admin角色
+    //其实该方法已经停用---------------------roles里面只是roleId-----为了简化，待改进
     if (roles.includes('admin')) {
       accessedRoutes = asyncRoutes || []
-    } else {
+    }
+    //----------------------------------该代码段不会执行----------------------
+    else {
       // 根据角色，过滤掉不能访问的路由表
       accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
     }

@@ -27,15 +27,25 @@ module.exports = {
   publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
-  lintOnSave: false, // process.env.NODE_ENV === 'development',
+  lintOnSave: true, // process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port: port,
-    open: true,
+    // port: port,
+    // open: true,
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:5297',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    },
     overlay: {
       warnings: false,
       errors: true
-    },
+    }
+
     // before: require('./mock/mock-server.js')
   },
   configureWebpack: {
