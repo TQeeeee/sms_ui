@@ -2,7 +2,6 @@ import request from '@/utils/request'
 
 export function getRoutes() {
   return request({
-    baseURL: 'http://localhost:5297',
     url: '/auth/routes',
     method: 'get'
   })
@@ -34,10 +33,3 @@ export function getInfo(token) {
   })
 }
 
-export function logout() {
-  return request({
-    baseURL: 'http://localhost:7080',
-    url: '/auth/logout',
-    method: 'post'
-  })
-}

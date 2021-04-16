@@ -54,6 +54,8 @@ import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import Search from '@/components/HeaderSearch'
 
+import { getToken, setToken, removeToken } from '@/utils/auth'
+
 export default {
   components: {
     Breadcrumb,
@@ -75,7 +77,46 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      await this.$store.dispatch('user/logout')
+      await this.$store.dispatch('user/logout').then(() => {
+        console.log('退出成功')
+      }).catch(e => {
+        console.log(e, '退出失败')
+      })
+
+      // new Promise((resolve, reject) => {});
+      //
+      // function(){
+      //  return new Promise((resolve, reject) => {
+      //    let data = addUser();
+      //    resolve(data);
+      //
+      //  }).then((data) =>{
+      //    let adminData = addAdmin();
+      //
+      //
+      //    return adminData;
+      //  }).then((adminData) =>{
+      //    let teacherData = addTeacher();
+      //
+      //
+      //    return new Promise((success,fail) =>{
+      //      success(teacherData)
+      //    });
+      //  }).then((teacherData) )
+      //
+      // }
+      //
+      //
+      //
+      // function(a,b,callback){
+      //   add1();
+      //   if (add1){
+      //     callback()
+      //   }
+      // }
+
+
+
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }

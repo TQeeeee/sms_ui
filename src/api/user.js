@@ -10,7 +10,7 @@ export function login(data) {
 
 export function getInfo(token) {
   return request({
-    url: 'api/auth/info', // '/vue-element-admin/user/info',
+    url: '/auth/info', // '/vue-element-admin/user/info',
     method: 'get',
     params: { token }
   })
@@ -18,34 +18,45 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    baseURL: 'http://localhost:5297',
-    url: '/auth/logout', //'/vue-element-admin/user/logout',
+    url: '/auth/logout', // '/vue-element-admin/user/logout',
     method: 'post'
   })
 }
 
-export function getUserList() {
+export function getUserList(query) {
   return request({
-    baseURL: 'http://localhost:7080',
-    url: `/user/search`,
-    method: 'get'
+    url: '/user/findPage',
+    method: 'get',
+    params: query
   })
 }
 
-export function assignUserRoles(data) {
+export function importUser(data) {
   return request({
-    baseURL: 'http://localhost:7080',
-    url: `/user/update/roles`,
-    method: 'put',
-    data
-  })
-}
-
-export function importUser(data){
-  return request({
-    baseURL: 'http://localhost:5297',
     url: '/user/import', // '/vue-element-admin/user/info',
     method: 'post',
-    params: data
+    data: data
   })
 }
+
+export function createUser(data) {
+  return request({
+    url: '/user/create', // '/vue-element-admin/user/info',
+    method: 'post',
+    data: data
+  })
+}
+export function updateUser(data) {
+  return request({
+    url: '/user/update', // '/vue-element-admin/user/info',
+    method: 'put',
+    data: data
+  })
+}
+export function deleteUser(id) {
+  return request({
+    url: `/user/delete/${id}`, // '/vue-element-admin/user/info',
+    method: 'delete'
+  })
+}
+

@@ -15,8 +15,8 @@ const mutations = {
   SET_NAME: (state, name) => {
     state.name = name
   },
-  SET_ROLES: (state, role) => {
-    state.roles.push(role)
+  SET_ROLES: (state, roles) => {
+    state.roles = roles
   }
 }
 
@@ -51,7 +51,7 @@ const actions = {
         if (!roleId || roleId.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
         }
-        commit('SET_ROLES', roleId)
+        commit('SET_ROLES', [roleId])
         commit('SET_NAME', userName)
         resolve(data)
       }).catch(error => {

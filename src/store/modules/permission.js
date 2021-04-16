@@ -1,6 +1,5 @@
 import { asyncRoutes, constantRoutes, componentMap } from '@/router'
 
-
 /**
  * Use meta.role to determine if the current user has permission
  * @param roles
@@ -48,14 +47,14 @@ const mutations = {
 }
 
 // 替换route对象中的component
-function replaceComponent(comp){
-  if(comp.component && typeof(comp.component)=='string'){
-    comp.component = componentMap[comp.component];
+function replaceComponent(comp) {
+  if (comp.component && typeof (comp.component) === 'string') {
+    comp.component = componentMap[comp.component]
   }
 
-  if(comp.children && comp.children.length>0){
-    for(let i=0;i<comp.children.length;i++){
-      comp.children[i] = replaceComponent(comp.children[i]);
+  if (comp.children && comp.children.length > 0) {
+    for (let i = 0; i < comp.children.length; i++) {
+      comp.children[i] = replaceComponent(comp.children[i])
     }
   }
   return comp
@@ -67,18 +66,17 @@ const actions = {
   //         ]
 
   generateRoutes: function({ commit }, roles) {
-
     let accessedRoutes
     // 判断当前的角色列表中，是否有包含admin角色
-    //其实该方法已经停用---------------------roles里面只是roleId-----为了简化，待改进
+    // 其实该方法已经停用---------------------roles里面只是roleId-----为了简化，待改进
     if (roles.includes('admin')) {
       accessedRoutes = asyncRoutes || []
-    }
-    //----------------------------------该代码段不会执行----------------------
-    else {
+    } else {
       // 根据角色，过滤掉不能访问的路由表
       accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
     }
+
+    // ----------------------------------该代码段不会执行----------------------
 
     // commit
     commit('SET_ROUTES', accessedRoutes)

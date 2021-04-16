@@ -5,12 +5,13 @@
 import Layout from '@/layout'
 
 // 管理员可访问的路由表
-const adminRouter =[
+const adminRouter = [
   {
     path: '/maintainSysPermission', // 管理系统权限
     component: Layout,
     name: 'MaintainSysPermission',
     meta: {
+      noCache: true,
       icon: 'list',
       title: '管理系统权限',
       roles: [1]
@@ -22,6 +23,7 @@ const adminRouter =[
         component: () => import('@/views/permission/role'),
         name: 'maintainRole',
         meta: {
+          noCache: true,
           title: '管理角色',
           roles: [1]
         }
@@ -33,6 +35,7 @@ const adminRouter =[
         component: () => import('@/views/permission/user'),
         name: 'maintainUserRole',
         meta: {
+          noCache: true,
           title: '管理用户',
           roles: [1]
         }
@@ -43,6 +46,7 @@ const adminRouter =[
         component: Layout,
         name: 'createRole',
         meta: {
+          noCache: true,
           title: '创建角色',
           roles: [1]
         }
@@ -53,34 +57,8 @@ const adminRouter =[
         component: Layout,
         name: 'updateRoleMenu',
         meta: {
+          noCache: true,
           title: '更改角色菜单',
-          roles: [1]
-        }
-      },
-      {
-        path: 'updateRolePermission',
-        hidden: true,
-        component: Layout,
-        name: 'updateRolePermission',
-        meta: {
-          roles: [1]
-        }
-      },
-      {
-        path: 'assignUserRole',
-        hidden: true,
-        component: Layout,
-        name: 'assignUserRole',
-        meta: {
-          roles: [1]
-        }
-      },
-      {
-        path: 'deleteRole',
-        hidden: true,
-        component: Layout,
-        name: 'deleteRole',
-        meta: {
           roles: [1]
         }
       }
@@ -110,7 +88,7 @@ const adminRouter =[
         // 创建角色的小按钮怎样处理???
         path: 'maintainUserRole',
         hidden: false,
-        component: () => import('@/views/permission/user'),
+        component: () => import('@/views/user/addUser'),
         name: 'maintainUserRole',
         meta: {
           title: '用户管理',

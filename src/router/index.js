@@ -18,20 +18,20 @@ import adminRouter from './modules/admin'
 */
 export const componentMap = {
   'layout': require('@/layout').default,
-  'redirect_index': () => import('@/views/redirect/index').then(m=>m.default),
-  'login_index': () => import('@/views/login/index').then(m=>m.default),
-  'login_auth_redirect': () => import('@/views/login/auth-redirect').then(m=>m.default),
-  'error_page_404': () => import('@/views/error-page/404').then(m=>m.default),
-  'error_page_401': () => import('@/views/error-page/401').then(m=>m.default),
-  'dashboard_index': () => import('@/views/dashboard/index').then(m=>m.default),
-  'documentation_index': () => import('@/views/documentation/index').then(m=>m.default),
-  'guide_index': () => import('@/views/guide/index').then(m=>m.default),
-  'profile_index': () => import('@/views/profile/index').then(m=>m.default),
-  'permission_menu': () => import('@/views/permission/menu').then(m=>m.default),
-  'permission_resource': () => import('@/views/permission/permResource').then(m=>m.default),
-  'permission_role': () => import('@/views/permission/role').then(m=>m.default),
-  'user_role': () => import('@/views/permission/user').then(m=>m.default),
-  'icons_index': () => import('@/views/icons/index').then(m=>m.default)
+  'redirect_index': () => import('@/views/redirect/index').then(m => m.default),
+  'login_index': () => import('@/views/login/index').then(m => m.default),
+  'login_auth_redirect': () => import('@/views/login/auth-redirect').then(m => m.default),
+  'error_page_404': () => import('@/views/error-page/404').then(m => m.default),
+  'error_page_401': () => import('@/views/error-page/401').then(m => m.default),
+  'dashboard_index': () => import('@/views/dashboard/index').then(m => m.default),
+  'documentation_index': () => import('@/views/documentation/index').then(m => m.default),
+  'guide_index': () => import('@/views/guide/index').then(m => m.default),
+  'profile_index': () => import('@/views/profile/index').then(m => m.default),
+  'permission_menu': () => import('@/views/permission/menu').then(m => m.default),
+  'permission_resource': () => import('@/views/permission/permResource').then(m => m.default),
+  'permission_role': () => import('@/views/permission/role').then(m => m.default),
+  'user_role': () => import('@/views/permission/user').then(m => m.default),
+  'icons_index': () => import('@/views/icons/index').then(m => m.default)
 }
 
 /**
@@ -53,7 +53,6 @@ export const componentMap = {
     activeMenu: '/example/list'  在左边菜单上高亮显示
   }
  */
-
 
 /**
  * constantRoutes
@@ -146,8 +145,6 @@ export const constantRoutes = [
   }
 ]
 
-
-
 /**
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
@@ -201,8 +198,8 @@ export const asyncRoutes = [
   // chartsRouter,
   // nestedRouter,
   // tableRouter,
-  //三个。。。含义：将adminRouter数组中的内容取出
-    ...adminRouter,
+  // 三个。。。含义：将adminRouter数组中的内容取出
+  ...adminRouter,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

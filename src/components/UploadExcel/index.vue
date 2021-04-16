@@ -1,7 +1,7 @@
 <template>
   <div>
     <input ref="excel-upload-input" class="excel-upload-input" type="file" accept=".xlsx, .xls" @change="handleClick">
-      <el-button :loading="loading" style="margin-left:16px;" size="mini" type="primary" @click="handleUpload">
+      <el-button :loading="loading" style="margin-left:16px;"  type="primary" @click="handleUpload">
         上传Excel
       </el-button>
   </div>
