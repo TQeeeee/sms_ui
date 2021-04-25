@@ -47,6 +47,10 @@
       </el-tooltip>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+
+      <div style="position:relative;color:#eee">
+        <router-link to="/forgetPassword">忘记密码</router-link>
+      </div>
     </el-form>
 
     <el-dialog title="Or connect with" :visible.sync="showDialog">

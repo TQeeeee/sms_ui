@@ -7,7 +7,7 @@ import Layout from '@/layout'
 // 这里roles:[1:管理员，2：教师]
 // 管理员可访问的路由表
 // 学籍管理，用户管理，班级管理，教师管理，奖惩管理
-const studentRouter = [
+const tempRouter =
   {
     path: '/maintainPersonal', // 个人中心
     component: Layout,
@@ -27,22 +27,11 @@ const studentRouter = [
         name: 'personalInfo',
         meta: {
           noCache: true,
-          title: '查看个人信息', // 仅能查看的
-          roles: [2, 3]
-        }
-      },
-      {
-        path: 'addInfo',
-        hidden: false,
-        component: () => import('@/views/personal/addInfo'),
-        name: 'addInfo',
-        meta: {
-          noCache: true,
           title: '完善个人信息', // 仅能查看的
           roles: [2, 3]
         }
       }
     ]
   }
-]
-export default studentRouter
+
+export default tempRouter

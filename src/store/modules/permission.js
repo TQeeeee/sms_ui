@@ -1,4 +1,7 @@
-import { asyncRoutes, constantRoutes, componentMap } from '@/router'
+import { asyncRoutes, constantRoutes } from '@/router'
+// import studentRouter from '@/router/modules/student'
+// import tempRouter from '@/router/modules/temp'
+// import errorRouter from '@/router/modules/error'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -20,7 +23,6 @@ function hasPermission(roles, route) {
  */
 export function filterAsyncRoutes(routes, roles) {
   const res = []
-
   routes.forEach(route => {
     const tmp = { ...route }
     if (hasPermission(roles, tmp)) {
@@ -30,7 +32,6 @@ export function filterAsyncRoutes(routes, roles) {
       res.push(tmp)
     }
   })
-
   return res
 }
 
@@ -47,35 +48,14 @@ const mutations = {
 }
 
 // 替换route对象中的component
-function replaceComponent(comp) {
-  if (comp.component && typeof (comp.component) === 'string') {
-    comp.component = componentMap[comp.component]
-  }
-
-  if (comp.children && comp.children.length > 0) {
-    for (let i = 0; i < comp.children.length; i++) {
-      comp.children[i] = replaceComponent(comp.children[i])
-    }
-  }
-  return comp
-}
 // 前端根据用户角色过滤可以访问的路由
 const actions = {
   // 当前的"roles": [
   //             1
   //         ]
-
+// 这里我更改了
   generateRoutes: function({ commit }, roles) {
-    let accessedRoutes
-    // 判断当前的角色列表中，是否有包含admin角色
-    // 其实该方法已经停用---------------------roles里面只是roleId-----为了简化，待改进
-    if (roles.includes('admin')) {
-      accessedRoutes = asyncRoutes || []
-    } else {
-      // 根据角色，过滤掉不能访问的路由表
-      accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-    }
-
+    const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
     // ----------------------------------该代码段不会执行----------------------
 
     // commit

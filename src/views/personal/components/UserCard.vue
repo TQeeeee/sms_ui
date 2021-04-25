@@ -1,50 +1,18 @@
 <template>
   <el-card style="margin-bottom:20px;">
-    <div slot="header" class="clearfix">
-      <span>About me</span>
-    </div>
-
     <div class="user-profile">
       <div class="box-center">
-        <pan-thumb :image="user.avatar" :height="'100px'" :width="'100px'" :hoverable="false">
-          <div>Hello</div>
-          {{ user.role }}
-        </pan-thumb>
-      </div>
-      <div class="box-center">
-        <div class="user-name text-center">{{ user.name }}</div>
-        <div class="user-role text-center text-muted">{{ user.role | uppercaseFirst }}</div>
+        <div class="user-name text-center">{{ user.actualName }}</div>
+        <!--        <div class="user-role text-center text-muted">{{ user.role | uppercaseFirst }}</div>-->
       </div>
     </div>
 
     <div class="user-bio">
-      <div class="user-education user-bio-section">
-        <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>Education</span></div>
+      <div v-for="(value,key,index) in user" :key="key" class="user-bio-section">
+        <div class="user-bio-section-header"><span>{{ key | keyNameFilter }}</span></div>
         <div class="user-bio-section-body">
           <div class="text-muted">
-            JS in Computer Science from the University of Technology
-          </div>
-        </div>
-      </div>
-
-      <div class="user-skills user-bio-section">
-        <div class="user-bio-section-header"><svg-icon icon-class="skill" /><span>Skills</span></div>
-        <div class="user-bio-section-body">
-          <div class="progress-item">
-            <span>Vue</span>
-            <el-progress :percentage="70" />
-          </div>
-          <div class="progress-item">
-            <span>JavaScript</span>
-            <el-progress :percentage="18" />
-          </div>
-          <div class="progress-item">
-            <span>Css</span>
-            <el-progress :percentage="12" />
-          </div>
-          <div class="progress-item">
-            <span>ESLint</span>
-            <el-progress :percentage="100" status="success" />
+            {{ value }}
           </div>
         </div>
       </div>
@@ -53,21 +21,39 @@
 </template>
 
 <script>
-import PanThumb from '@/components/PanThumb'
 
 export default {
-  components: { PanThumb },
+  filters: {
+    keyNameFilter(key) {
+      const keyNameMap = {
+        'actualName': '真实姓名',
+        'address': '家庭住址',
+        'telephone': '电话号码',
+        'gender': '性别',
+        'age': '年龄',
+        'emailAddress': '邮箱地址',
+        'prizeRecord': '奖惩记录',
+        'start': '入学时间',
+        'classId': '班级ID',
+        'gradeId': '年级',
+        'majorId': '专业ID',
+      }
+      return keyNameMap[key]
+    }
+  },
   props: {
     user: {
       type: Object,
       default: () => {
         return {
-          name: '',
-          email: '',
-          avatar: '',
-          role: ''
+          name: '啊啊啊'
         }
       }
+    }
+  },
+  computed: {
+    userInfos() {
+      return this.user.filter()
     }
   }
 }
@@ -129,6 +115,9 @@ export default {
       margin-bottom: 10px;
       font-weight: bold;
     }
+  }
+  .text-muted{
+    padding-left: 8px;
   }
 }
 </style>

@@ -7,32 +7,9 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import componentsRouter from './modules/components'
-import chartsRouter from './modules/charts'
-import tableRouter from './modules/table'
-import nestedRouter from './modules/nested'
 
 import adminRouter from './modules/admin'
-/**
- * 定义组件名称和组件对象的对应关系
-*/
-export const componentMap = {
-  'layout': require('@/layout').default,
-  'redirect_index': () => import('@/views/redirect/index').then(m => m.default),
-  'login_index': () => import('@/views/login/index').then(m => m.default),
-  'login_auth_redirect': () => import('@/views/login/auth-redirect').then(m => m.default),
-  'error_page_404': () => import('@/views/error-page/404').then(m => m.default),
-  'error_page_401': () => import('@/views/error-page/401').then(m => m.default),
-  'dashboard_index': () => import('@/views/dashboard/index').then(m => m.default),
-  'documentation_index': () => import('@/views/documentation/index').then(m => m.default),
-  'guide_index': () => import('@/views/guide/index').then(m => m.default),
-  'profile_index': () => import('@/views/profile/index').then(m => m.default),
-  'permission_menu': () => import('@/views/permission/menu').then(m => m.default),
-  'permission_resource': () => import('@/views/permission/permResource').then(m => m.default),
-  'permission_role': () => import('@/views/permission/role').then(m => m.default),
-  'user_role': () => import('@/views/permission/user').then(m => m.default),
-  'icons_index': () => import('@/views/icons/index').then(m => m.default)
-}
+import studentRouter from './modules/student'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -89,6 +66,12 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/forgetPassword',
+    // 到forgetPassword组件
+    component: () => import('@/views/login/forgetPassword'),
+    hidden: true
+  },
+  {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
     hidden: true
@@ -129,19 +112,6 @@ export const constantRoutes = [
         meta: { title: 'Documentation', icon: 'documentation', affix: false }
       }
     ]
-  },
-  {
-    path: '/guide',
-    component: Layout,
-    redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'Guide',
-        meta: { title: 'Guide', icon: 'guide', noCache: true }
-      }
-    ]
   }
 ]
 
@@ -152,47 +122,6 @@ export const constantRoutes = [
  * 只有拥有权限（对应角色）的用户，才能显示的路由表
  */
 export const asyncRoutes = [
-  {
-    path: '/permission',
-    component: Layout,
-    redirect: '/permission/page',
-    alwaysShow: true, // will always show the root menu
-    name: 'Permission',
-    meta: {
-      title: 'Permission',
-      icon: 'lock',
-      roles: [1] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'page',
-        component: () => import('@/views/permission/page'),
-        name: 'PagePermission',
-        meta: {
-          title: 'Page Permission',
-          roles: [1] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'directive',
-        component: () => import('@/views/permission/directive'),
-        name: 'DirectivePermission',
-        meta: {
-          title: 'Directive Permission'
-          // if do not set roles, means: this page does not require permission
-        }
-      },
-      {
-        path: 'role',
-        component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: 'Role Permission',
-          roles: [1]
-        }
-      }
-    ]
-  },
   /** when your routing map is too long, you can split it into small modules **/
   // componentsRouter,
   // chartsRouter,
@@ -200,8 +129,10 @@ export const asyncRoutes = [
   // tableRouter,
   // 三个。。。含义：将adminRouter数组中的内容取出
   ...adminRouter,
-  // 404 page must be placed at the end !!!
+  ...studentRouter,
   { path: '*', redirect: '/404', hidden: true }
+  // // 404 page must be placed at the end !!!
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({

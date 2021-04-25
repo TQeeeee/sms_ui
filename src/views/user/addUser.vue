@@ -9,7 +9,6 @@
         Add
       </el-button>
     </div>
-
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -18,8 +17,7 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column label="序号" prop="index" type="index" align="center" width="80" :index="makeIndex">
-      </el-table-column>
+      <el-table-column label="序号" prop="index" type="index" align="center" width="80" :index="makeIndex" />
       <el-table-column label="用户Id" prop="userId" align="center" width="80">
         <template slot-scope="{row}">
           <span>{{ row.userId }}</span>
@@ -46,7 +44,7 @@
       </el-table-column>
       <el-table-column label="操作" align="center" min-width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)"style="margin-right: 10px">
+          <el-button type="primary" size="mini" style="margin-right: 10px" @click="handleUpdate(row)">
             Edit
           </el-button>
           <el-popconfirm
@@ -67,7 +65,7 @@
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="用户ID" prop="userId">
+        <el-form-item v-if="temp.confirmed === 0" label="用户ID" prop="userId">
           <el-input v-model="temp.userId" />
         </el-form-item>
         <el-form-item label="用户名" prop="userName">
@@ -76,7 +74,7 @@
         <el-form-item label="初始密码" prop="userPassword">
           <el-input v-model="temp.userPassword" />
         </el-form-item>
-        <el-form-item label="用户角色" prop="roleId">
+        <el-form-item v-if="temp.confirmed === 0" label="用户角色" prop="roleId">
           <el-select v-model="temp.roleId" class="filter-item" placeholder="Please select">
             <el-option v-for="item in roleNameOptions" :key="item.roleId" :label="item.roleName" :value="item.roleId" />
           </el-select>
@@ -98,7 +96,6 @@
 <script>
 import { getUserList, createUser, updateUser, deleteUser } from '@/api/user'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-
 const roleNameOptions = [
   { roleId: 1, roleName: '管理员' },
   { roleId: 2, roleName: '辅导员' },
@@ -143,7 +140,7 @@ export default {
         userName: undefined
       },
       // 添加或更改用户所需的数据栏
-      temp: {// undefined是真正的啥也没有
+      temp: { // undefined是真正的啥也没有
         userId: '',
         userName: '',
         userPassword: '',

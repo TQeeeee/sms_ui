@@ -75,7 +75,7 @@
         @current-change="handleCurrentChange"
         @size-change="handleSizeChange"
       />
-      <el-button v-if="total>0" align="center" :loading="loading" style="margin-left:16px;" type="primary" @click="handleSubmit">
+      <el-button v-if="total>0" :align="center" :loading="loading" style="margin-left:16px;" type="primary" @click="handleSubmit">
         确认导入
       </el-button>
     </div>

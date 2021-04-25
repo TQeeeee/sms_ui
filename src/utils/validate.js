@@ -21,6 +21,53 @@ export function validUsername(str) {
 }
 
 /**
+ *@param {string} str
+ *@returns {Boolean}
+ */
+export function validateNotnull(rule, value, callback) {
+  console.log('validating null' + value)
+  if (!value) {
+    callback(new Error('该字段不能为空'))
+  } else {
+    callback()
+  }
+}
+
+/* 是否手机号码*/
+export function validatePhone(rule, value, callback) {
+  const reg = /^[1][3,4,5,7,8][0-9]{9}$/
+  if (value == '' || value == undefined || value == null) {
+    callback(new Error('电话不能为空'))
+  } else {
+    if ((!reg.test(value)) && value != '') {
+      callback(new Error('请输入正确的电话号码'))
+    } else {
+      callback()
+    }
+  }
+}
+
+// 验证是否1-99之间
+export function isOneToNinetyNine(rule, value, callback) {
+  if (!value) {
+    return callback(new Error('输入不可以为空'))
+  }
+  setTimeout(() => {
+    if (!Number(value)) {
+      callback(new Error('请输入正整数'))
+    } else {
+      const re = /^[1-9][0-9]{0,1}$/
+      const rsCheck = re.test(value)
+      if (!rsCheck) {
+        callback(new Error('请输入正整数，值为【1,99】'))
+      } else {
+        callback()
+      }
+    }
+  }, 0)
+}
+
+/**
  * @param {string} url
  * @returns {Boolean}
  */
@@ -57,12 +104,18 @@ export function validAlphabets(str) {
 }
 
 /**
- * @param {string} email
- * @returns {Boolean}
  */
-export function validEmail(email) {
+export function validEmail(rule, value, callback) {
   const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  return reg.test(email)
+  if (value === '' || value === undefined || value == null) {
+    callback(new Error('邮箱不能为空'))
+  } else {
+    if ((!reg.test(value)) && value !== '') {
+      callback(new Error('请输入正确的邮箱地址'))
+    } else {
+      callback()
+    }
+  }
 }
 
 /**

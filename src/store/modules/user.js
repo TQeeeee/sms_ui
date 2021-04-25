@@ -5,7 +5,10 @@ import router, { resetRouter } from '@/router'
 const state = {
   token: getToken(),
   name: '',
-  roles: []
+  roles: [],
+  confirmed: 0,
+  roleId: 0,
+  userId: ''
 }
 
 const mutations = {
@@ -17,6 +20,15 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_CONFIRMED: (state, confirmed) => {
+    state.confirmed = confirmed
+  },
+  SET_ROLEID: (state, roleId) => {
+    state.roleId = roleId
+  },
+  SET_USERID: (state, userId) => {
+    state.userId = userId
   }
 }
 
@@ -46,13 +58,17 @@ const actions = {
         if (!data) {
           reject('Verification failed, please Login again.')
         }
-        const { userName, roleId } = data
+        const { userName, roleId, confirmed, userId } = data
         // roles must be a non-empty array
         if (!roleId || roleId.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
         }
         commit('SET_ROLES', [roleId])
         commit('SET_NAME', userName)
+        commit('SET_CONFIRMED', confirmed)
+        // roleId 是根据项目实际更改的
+        commit('SET_ROLEID', roleId)
+        commit('SET_USERID', userId)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -79,12 +95,25 @@ const actions = {
       })
     })
   },
+  userConfirm({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      commit('SET_CONFIRMED', 1)
+      resolve()
+    })
+  },
 
   // remove token
   resetToken({ commit }) {
     return new Promise(resolve => {
       commit('SET_TOKEN', '')
       commit('SET_ROLES', [])
+      // 把当前的都给清除了
+      commit('SET_NAME', '')
+      commit('SET_CONFIRMED', undefined)
+      // roleId 是根据项目实际更改的
+      commit('SET_ROLEID', undefined)
+      commit('SET_USERID', '')
+
       removeToken()
       resolve()
     })
