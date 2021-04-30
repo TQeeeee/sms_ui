@@ -172,9 +172,11 @@ export default {
         this.listQuery.teacherId = this.userId
       }
       getStudentList(this.listQuery).then((res) => {
-        this.list = res.data.items
-        this.total = res.data.total
-        this.refreshQuery()
+        if (res.code === 20000) {
+          this.list = res.data.items
+          this.total = res.data.total
+          this.refreshQuery()
+        }
         setTimeout(() => {
           this.listLoading = false
         }, 1500)
@@ -231,8 +233,8 @@ export default {
       updateStudent(tempData).then(() => {
         // 当前数组里面的这个元素的值也要变为1
         // 主要就是把数组里面元素值变为1，别的是不重要的
-        const index = this.list.findIndex(v => v.studentId === this.tempStudent.studentId) // userIndex是永远不会变的X
-        this.list.splice(index, 1, this.tempStudent)
+        const index = this.list.findIndex(v => v.studentId === tempData.studentId) // userIndex是永远不会变的X
+        this.list.splice(index, 1, tempData)
         this.$notify({
           title: 'Success',
           message: 'Update Successfully',

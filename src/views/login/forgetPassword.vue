@@ -22,7 +22,7 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleSendEmail">SendEmail</el-button>
 
-      <div style="position:relative;color:#eee">
+      <div class="forgetpassword">
         <router-link to="/login">返回登录</router-link>
       </div>
     </el-form>
@@ -86,7 +86,6 @@ export default {
       color: $cursor;
     }
   }
-
   /* reset element-ui css */
   .login-container {
     .el-input {
@@ -125,17 +124,27 @@ export default {
   $dark_gray:#889aa4;
   $light_gray:#eee;
 
+  .forgetpassword{
+    position: relative;
+    color: #2e90f4f5;
+    text-align: right;
+    font-weight: bold;
+  }
+
   .login-container {
     min-height: 100%;
     width: 100%;
-    background-color: $bg;
+    background: url("../../assets/background/wpBlue2.jpg") no-repeat center;
+    background-position: 0px -15;
+    //background-image: url("../../assets/background/wpBlue.jpg") no;
+    background-size: cover;
     overflow: hidden;
 
     .login-form {
       position: relative;
       width: 520px;
       max-width: 100%;
-      padding: 160px 35px 0;
+      padding: 265px 35px 0;
       margin: 0 auto;
       overflow: hidden;
     }
@@ -165,7 +174,7 @@ export default {
 
       .title {
         font-size: 26px;
-        color: $light_gray;
+        color: #2e90f4f5;
         margin: 0px auto 40px auto;
         text-align: center;
         font-weight: bold;

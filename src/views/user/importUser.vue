@@ -1,6 +1,11 @@
 <template>
   <div class="app-container">
     <upload-excel-component :on-success="handleSuccess" :before-upload="beforeUpload" />
+    <span class="greenText">
+    <a href="src/assets/download/userTemplate.xlsx" download="userTemplate.xlxs">
+      《用户表》导入模板下载
+    </a>
+    </span>
     <el-table
       v-if="total > 0"
       :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"

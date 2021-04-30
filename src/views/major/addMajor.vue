@@ -153,6 +153,7 @@ export default {
         } else {
           this.$message('添加失败！')
         }
+        this.dialogFormVisible = false
       })
     },
     updateData() {
@@ -169,6 +170,7 @@ export default {
         } else {
           this.$message('更新失败！')
         }
+        this.dialogFormVisible = false
       })
     },
     handleDelete(row, index) {

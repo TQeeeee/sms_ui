@@ -27,8 +27,8 @@ const adminRouter = [
         name: 'manageStudent',
         meta: {
           noCache: true,
-          title: '学生管理', // 学生模块
-          roles: [1, 2]
+          title: '学生请假', // 学生模块
+          roles: [2, 3]
         }
       },
       {
@@ -78,16 +78,6 @@ const adminRouter = [
       roles: [1]
     },
     children: [
-      {
-        path: 'maintainRole',
-        hidden: false,
-        component: () => import('@/views/permission/role'),
-        name: 'maintainRole',
-        meta: {
-          title: '角色管理',
-          roles: [1]
-        }
-      },
       {
         // 创建角色的小按钮怎样处理???
         path: 'addUser',
@@ -143,14 +133,13 @@ const adminRouter = [
         }
       },
       {
-        // 创建角色的小按钮怎样处理???
-        path: 'updateInstructor',
+        path: 'searchClass',
         hidden: false,
-        component: () => import('@/views/major/updateInstructor'),
-        name: 'updateInstructor',
+        component: () => import('@/views/major/searchClass'),
+        name: 'searchClass',
         meta: {
-          title: '更改辅导员',
-          roles: [1]
+          title: '查询班级',
+          roles: [2]
         }
       }
     ]
@@ -172,7 +161,7 @@ const adminRouter = [
         component: () => import('@/views/teacher/searchTeacher'),
         name: 'searchTeacher',
         meta: {
-          title: '查找辅导员', // 这里要用到多条件组合查询，审核的和未审核的都要显示
+          title: '查询辅导员', // 这里要用到多条件组合查询，审核的和未审核的都要显示
           roles: [1]
         }
       },
@@ -209,7 +198,7 @@ const adminRouter = [
         meta: {
           noCache: true,
           title: '填写奖惩信息',
-          roles: [1, 2, 3]
+          roles: [2]
         }
       },
       {
@@ -220,7 +209,7 @@ const adminRouter = [
         meta: {
           noCache: true,
           title: '查找奖惩信息',
-          roles: [1, 2, 3]
+          roles: [3]
         }
       },
       {

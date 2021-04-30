@@ -32,4 +32,37 @@ export function deleteMajor(id) {
     method: 'delete'
   })
 }
+export function getDisplayClassList(query) {
+  return request({
+    url: `/class/findAllDisplay`,
+    method: 'post',
+    data: query
+  })
+}
 
+export function createClass(data) {
+  return request({
+    url: `/class/create`,
+    method: 'post',
+    data: data
+  })
+}
+export function updateClass(data) {
+  return request({
+    url: '/class/update', // '/vue-element-admin/user/info',
+    method: 'put',
+    data: data
+  })
+}
+export function deleteClass(id) {
+  return request({
+    url: `/class/delete/${id}`, // '/vue-element-admin/user/info',
+    method: 'delete'
+  })
+}
+export function getClassListByTeacher(id) {
+  return request({
+    url: `/class/get/${id}`, // '/vue-element-admin/user/info',
+    method: 'get'
+  })
+}

@@ -59,7 +59,7 @@
             cancel-button-text="取消"
             icon="el-icon-info"
             icon-color="red"
-            title="确认要删除该条记录吗？"
+            title="强行删除该辅导员吗？其班级将随机分配至其他辅导员"
             @onConfirm="handleDelete(row,$index)"
           >
             <el-button slot="reference" size="mini" type="danger">
@@ -96,9 +96,10 @@
 
 <script>
 import { deleteTeacher, getAllTeacher } from '../../api/teacher'
-
+import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 export default {
   name: 'SearchTeacher',
+  components: { Pagination },
   data() {
     return {
       list: null,

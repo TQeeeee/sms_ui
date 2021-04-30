@@ -3,10 +3,10 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">请登录</h3>
+        <h3 class="title">用户登录</h3>
       </div>
 
-<!--      删除了-->
+      <!--      删除了-->
       <el-form-item prop="userid">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -48,7 +48,7 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
-      <div style="position:relative;color:#eee">
+      <div class="forgetpassword">
         <router-link to="/forgetPassword">忘记密码</router-link>
       </div>
     </el-form>
@@ -205,8 +205,16 @@ $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input {
-    color: $cursor;
+    //color: $cursor;
+    color: #2e90f4f5;
   }
+}
+
+.forgetpassword{
+  position: relative;
+  color: #2e90f4f5;
+  text-align: right;
+  font-weight: bold;
 }
 
 /* reset element-ui css */
@@ -222,14 +230,15 @@ $cursor: #fff;
       -webkit-appearance: none;
       border-radius: 0px;
       padding: 12px 5px 12px 15px;
-      color: $light_gray;
+      color: $bg;
       height: 47px;
       caret-color: $cursor;
 
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: $cursor !important;
+      &:-webkit-autofill{
+        -webkit-text-fill-color: #807c7c;
+        transition: background-color 5000s ease-out 0.5s;
       }
+
     }
   }
 
@@ -250,14 +259,17 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  background: url("../../assets/background/wpBlue2.jpg") no-repeat center;
+  background-position: 0px -15;
+  //background-image: url("../../assets/background/wpBlue.jpg") no;
+  background-size: cover;
   overflow: hidden;
 
   .login-form {
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 185px 35px 0;
     margin: 0 auto;
     overflow: hidden;
   }

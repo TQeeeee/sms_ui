@@ -98,9 +98,10 @@
 
 <script>
 import { getAllTeacher, updateTeacher } from '../../api/teacher'
-
+import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 export default {
   name: 'ValidateTeacher',
+  components: { Pagination },
   data() {
     return {
       readonly: true,

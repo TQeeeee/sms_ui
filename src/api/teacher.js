@@ -27,6 +27,12 @@ export function getAllTeacher(data) {
     data: data
   })
 }
+export function findAllNoPage() {
+  return request({
+    url: `/teacher/getAll`,
+    method: 'get'
+  })
+}
 
 export function deleteTeacher(id) {
   return request({

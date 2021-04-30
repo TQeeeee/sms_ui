@@ -20,6 +20,15 @@ export function getStudentList(query) {
     data: query
   })
 }
+export function getOldStudentList(query) {
+  return request({
+    url: `/oldStudent/findAll`,
+    method: 'post',
+    data: query
+  })
+}
+
+
 export function updateStudent(data) {
   return request({
     url: '/student/update', // '/vue-element-admin/user/info',
